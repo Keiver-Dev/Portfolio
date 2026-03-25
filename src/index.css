@@ -1,0 +1,79 @@
+/* ── Fonts — ALL @import must come first ── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: #f7b538;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --surface: #f7f5f2;
+    --border: #e8e6e1;
+    --text-primary: #1a1f2e;
+    --text-secondary: #6b6e7a;
+    --primary: #1a1f2e;
+    --primary-foreground: #ffffff;
+  }
+
+  .dark {
+    --background: #1a1a1a;
+    --surface: #222220;
+    --border: #2e2c28;
+    --text-primary: #f0ede6;
+    --text-secondary: #888884;
+    --primary: #f0ede6;
+    --primary-foreground: #1a1a18;
+  }
+
+  html,
+  body {
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100dvh;
+    background-color: var(--background);
+    color: var(--text-primary);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  @media (pointer: fine) {
+    html, body, * {
+      cursor: none !important;
+    }
+  }
+
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
