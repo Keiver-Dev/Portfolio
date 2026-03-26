@@ -10,10 +10,10 @@ import {
   Lightbulb,
   CheckCircle2,
 } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
+import { GithubIcon } from "@/components/ui/Icons";
 import { projects } from "@/data/projects";
-import Header from "@/components/Intro/Header";
-import Footer from "@/components/Intro/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 /* ─── animation presets ─────────────────────────────────── */
 const fadeUp = (delay = 0) => ({
@@ -46,19 +46,8 @@ const CaseStudy = () => {
   const currentIndex = projects.findIndex((p) => p.id === id);
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
-  /* ── fallback data for optional fields ── */
-  const process = project.process ?? [
-    { phase: "Discovery", description: "Mapping requirements, identifying constraints, and understanding user context." },
-    { phase: "Architecture", description: "Designing the system structure, data flows, and API contracts." },
-    { phase: "Build", description: "Iterative implementation with continuous testing and refinement." },
-    { phase: "Ship", description: "Deployment, monitoring, and post-launch performance analysis." },
-  ];
-
-  const learnings = project.learnings ?? [
-    "Constraints force creative solutions — the best architecture decisions came from limitations.",
-    "Early user feedback loops cut rework time dramatically.",
-    "Documentation written during development is always better than retrospective notes.",
-  ];
+  const process = project.process;
+  const learnings = project.learnings;
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-background pt-24">
@@ -95,26 +84,46 @@ const CaseStudy = () => {
               </p>
             </Motion.div>
 
-            {/* CTA buttons */}
-            <Motion.div className="flex items-center gap-3 shrink-0" {...fadeUp(0.16)}>
-              <a
-                href={project.links?.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View source on GitHub"
-                className="p-4 rounded-full bg-surface border border-border hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
-              >
-                <GithubIcon size={20} />
-              </a>
-              <a
-                href={project.links?.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold text-sm tracking-wide hover:shadow-xl hover:shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                LIVE DEMO <ExternalLink size={16} />
-              </a>
-            </Motion.div>
+            {/* CTA buttons — only shown when links are available */}
+            {(project.links?.github || project.links?.live) && (
+              <Motion.div className="flex flex-wrap items-center gap-3 shrink-0" {...fadeUp(0.16)}>
+                {project.links?.github && (
+                  project.links.github.startsWith("http") ? (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View source on GitHub"
+                      className="p-4 rounded-full bg-surface border border-border hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
+                    >
+                      <GithubIcon size={20} />
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-surface border border-border/50 text-text-secondary/60 cursor-not-allowed select-none">
+                      <GithubIcon size={18} />
+                      <span className="text-sm font-bold tracking-wide">{project.links.github}</span>
+                    </div>
+                  )
+                )}
+                {project.links?.live && (
+                  project.links.live.startsWith("http") ? (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold text-sm tracking-wide hover:shadow-xl hover:shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      LIVE DEMO <ExternalLink size={16} />
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-surface border border-border/50 text-text-secondary/60 cursor-not-allowed select-none">
+                      <ExternalLink size={16} />
+                      <span className="text-sm font-bold tracking-wide">{project.links.live}</span>
+                    </div>
+                  )
+                )}
+              </Motion.div>
+            )}
           </div>
 
           {/* ── Stats bar ── */}
@@ -151,12 +160,29 @@ const CaseStudy = () => {
               <h2 className="text-4xl font-serif leading-tight">The Context</h2>
             </Motion.div>
 
-            <Motion.p
-              variants={{ initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } }}
-              className="text-xl md:text-2xl text-text-secondary leading-relaxed max-w-3xl"
-            >
-              {project.overview}
-            </Motion.p>
+            <div className="flex flex-col gap-8 w-full max-w-3xl">
+              <Motion.p
+                variants={{ initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } }}
+                className="text-xl md:text-2xl text-text-secondary leading-relaxed"
+              >
+                {project.overview}
+              </Motion.p>
+              
+              {project.notBuiltReason && (
+                <Motion.div
+                  variants={{ initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } }}
+                  className="p-6 bg-surface border border-accent/20 rounded-2xl flex items-start gap-4"
+                >
+                  <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-1">
+                    <div className="w-2 h-2 rounded-full bg-accent" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-xs font-bold tracking-widest uppercase text-accent">Why I didn't build this (yet)</span>
+                    <p className="text-sm text-text-secondary/90 leading-relaxed font-mono">{project.notBuiltReason}</p>
+                  </div>
+                </Motion.div>
+              )}
+            </div>
           </Motion.div>
 
           {/* Challenge & Solution cards */}
@@ -189,10 +215,16 @@ const CaseStudy = () => {
                 <Zap size={22} className="text-accent" />
               </div>
               <div className="flex flex-col gap-3">
-                <span className="text-[9px] font-bold tracking-[0.35em] uppercase text-white/30">Solution</span>
-                <h3 className="text-3xl font-serif">Technical Answer</h3>
+                <span className="text-[9px] font-bold tracking-[0.35em] uppercase text-white/30">
+                  {project.type === "concept" ? "Proposed Approach" : "Solution"}
+                </span>
+                <h3 className="text-3xl font-serif">
+                  {project.type === "concept" ? "System Design" : "Technical Answer"}
+                </h3>
               </div>
-              <p className="text-lg opacity-75 leading-relaxed">{project.solution}</p>
+              <p className="text-lg opacity-75 leading-relaxed">
+                {project.type === "concept" ? project.proposedApproach : project.solution}
+              </p>
             </Motion.div>
           </div>
         </div>

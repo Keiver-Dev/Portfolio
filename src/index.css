@@ -24,23 +24,25 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --surface: #f7f5f2;
-    --border: #e8e6e1;
-    --text-primary: #1a1f2e;
-    --text-secondary: #6b6e7a;
-    --primary: #1a1f2e;
-    --primary-foreground: #ffffff;
+    --background: #ffffff;   /* Blanco estricto/puro */
+    --surface: #f2f2f2;      /* Gris sumamente claro (como la barra nav en la foto) */
+    --border: #e5e5e5;       /* Gris sutil para separar (casi invisible) */
+    --text-primary: #111111; /* Negro mate muy denso (como el texto serif grande) */
+    --text-secondary: #5a5a5a; /* Gris neutro para texto secundario */
+    --primary: #111111;      /* El botón negro "Intro" */
+    --primary-foreground: #ffffff; /* Letras blancas sobre el botón negro */
+    --color-accent: #7cb518; /* El tinte morado intenso del badge "20" en Cases */
   }
 
   .dark {
-    --background: #1a1a1a;
-    --surface: #222220;
-    --border: #2e2c28;
-    --text-primary: #f0ede6;
-    --text-secondary: #888884;
-    --primary: #f0ede6;
-    --primary-foreground: #1a1a18;
+    --background: #171717;   /* Negro mate profundo (estilo Becklyn) */
+    --surface:    #1e1e1e;   /* Apenas discernible para contenedores/pill nav */
+    --border:     #2a2a2a;   /* Líneas divisorias extremadamente sutiles */
+    --text-primary: #f5f4ef; /* Off-white / Crema pálido técnico */
+    --text-secondary: #a3a3a3; /* Gris neutro para contraste secundario */
+    --primary:      #f5f4ef;      
+    --primary-foreground: #171717;
+    --color-accent: #a3d977; /* Oro/Champange tostado (High-end editorial) */
   }
 
   html,

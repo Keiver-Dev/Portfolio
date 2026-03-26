@@ -1,17 +1,13 @@
 import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const projects = [
-  { id: 1, title: "kairo-mail-service", link: "/case/vlynk", color: "bg-surface", tags: ["Node.js", "Email"], span: "col-span-1 md:col-span-2 row-span-1" },
-  { id: 2, title: "Vlynk Landing Page", link: "/case/vlynk", color: "bg-accent/30 text-accent", tags: ["GSAP", "Brutalism"], span: "col-span-1 md:col-span-2 row-span-1" },
-  { id: 3, title: "Open Source", link: "/case/webhook-forge", color: "bg-primary/10", tags: ["Community"], span: "col-span-1 row-span-2" },
-  { id: 4, title: "Vlynk SaaS", link: "/case/vlynk", color: "bg-accent/30", tags: ["Engine", "V0.9 Beta"], span: "col-span-1 md:col-span-2 row-span-2" },
-  { id: 5, title: "Railway", link: "/case/vlynk", color: "bg-primary/20", tags: ["Deploy"], span: "col-span-1 row-span-1" },
-  { id: 6, title: "hookpipe", link: "/case/webhook-forge", color: "bg-surface", tags: ["CLI"], span: "col-span-1 row-span-1" },
-  { id: 7, title: "Distributed Systems", link: "/case/vlynk", color: "bg-primary/5", tags: ["Event-Driven"], span: "col-span-1 md:col-span-4 row-span-1" },
-];
+// Placeholders removidos temporalmente
+const projects = [];
 
 const WorkGrid = () => {
+  // Section disabled temporarily as requested until real projects are added
+  if (projects.length === 0) return null;
+
   return (
     <section className="py-24 bg-background">
       <div className="max-w-screen-2xl mx-auto w-full px-6 md:px-12 lg:px-24">

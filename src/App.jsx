@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import Intro from "@/pages/Intro";
 import CaseStudy from "@/pages/CaseStudy";
 import About from "@/pages/About";
-import CustomCursor from "@/components/CustomCursor";
+import Works from "@/pages/Works";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ const App = () => {
       <div className="flex flex-col min-h-screen bg-background text-text-primary selection:bg-accent/30 selection:text-primary">
         <Routes>
           <Route path="/" element={<Intro />} />
+          <Route path="/works" element={<Works />} />
           <Route path="/about" element={<About />} />
           <Route path="/case/:id" element={<CaseStudy />} />
           {/* Fallback to Home */}

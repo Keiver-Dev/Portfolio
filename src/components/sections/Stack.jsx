@@ -13,7 +13,7 @@ const Stack = () => {
     },
     {
       name: "Infrastructure & Tools",
-      items: ["Railway", "Vercel", "Cloudflare R2", "GitHub Actions", "Docker", "CI/CD"]
+      items: ["Vercel", "GitHub Actions", "Docker", "CI/CD"]
     }
   ];
 
@@ -68,33 +68,32 @@ const Stack = () => {
               </h3>
               <div className="flex items-center gap-6">
                  <span className="text-xs font-mono text-primary/60 uppercase tracking-[0.3em] font-bold">
-                  v0.9.2-beta focus
+                  Full Stack Ecosystem
                 </span>
                 <div className="h-px w-24 bg-border" />
               </div>
             </div>
 
-            <div className="flex flex-col gap-12 max-w-2xl border-l border-border pl-12 py-4">
+            <div className="flex flex-col gap-12 max-w-2xl mt-4">
               <p className="text-3xl font-serif italic text-text-secondary leading-snug opacity-90">
-                "No AI, no manual rules — pure deterministic logic."
+                "Code is read more often than it is written — prioritize clarity and scale."
               </p>
               
               <div className="flex flex-col gap-8">
                 <p className="text-xl text-text-secondary leading-relaxed">
-                  I specialize in building complex asynchronous systems like the Vlynk Context Engine. 
-                  My focus is on strict data hierarchies and high-reliability backend services 
-                  that scale beyond just the surface level.
+                  I am a versatile Full Stack Developer deeply embedded in the Node.js / React ecosystem. 
+                  My focus is on building complete products — balancing sleek, modern frontend designs 
+                  with secure, scalable backend architectures.
                 </p>
                 <p className="text-xl text-text-secondary leading-relaxed">
-                  Whether it's auditing webhook security for Webhook-forge or crafting 
-                  "technical brutalist" landing pages, I bridge the gap between 
-                  hardcore system logic and high-end visual execution.
+                  From writing complex database queries and real-time Socket.io endpoints to animating 
+                  DOM elements with Framer Motion, I handle the entire technical lifespan of a web application.
                 </p>
               </div>
             </div>
 
             <button className="group flex items-center gap-4 bg-transparent text-primary hover:text-accent font-bold self-start transition-all tracking-widest text-xs">
-              EXPLORE THE CORE LOGIC <ArrowRight size={16} className="group-hover:translate-x-4 transition-transform" />
+              EXPLORE MY APPROACH <ArrowRight size={16} className="group-hover:translate-x-4 transition-transform" />
             </button>
           </div>
         </div>

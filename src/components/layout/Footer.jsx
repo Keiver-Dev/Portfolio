@@ -1,5 +1,5 @@
 import { motion as Motion } from "framer-motion";
-import { GithubIcon, LinkedInIcon, XIcon } from "@/components/Icons";
+import { GithubIcon, LinkedInIcon, XIcon } from "@/components/ui/Icons";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-2">
             <span className="text-3xl font-serif text-primary tracking-tighter">keiver.</span>
             <p className="text-xs text-text-secondary uppercase tracking-[0.2em]">
-              Exploring Digital Future.
+              Frontend ships. Backend holds.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex items-center gap-6">
             <a 
-              href="#" 
+              href="https://github.com/Keiver-Dev" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-all transform hover:-translate-y-1 shadow-sm"
@@ -38,22 +38,13 @@ const Footer = () => {
               <GithubIcon size={18} />
             </a>
             <a 
-              href="#" 
+              href="https://www.linkedin.com/in/keiver-luna/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-all transform hover:-translate-y-1 shadow-sm"
               aria-label="LinkedIn"
             >
               <LinkedInIcon size={18} />
-            </a>
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full border border-border hover:bg-primary hover:text-primary-foreground transition-all transform hover:-translate-y-1 shadow-sm"
-              aria-label="X (Twitter)"
-            >
-              <XIcon size={18} />
             </a>
           </div>
         </div>

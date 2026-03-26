@@ -1,9 +1,10 @@
-import Header from "@/components/Intro/Header";
-import Hero from "@/components/Intro/Hero";
-import FeaturedWork from "@/components/Work/FeaturedWork";
-import WorkGrid from "@/components/Work/WorkGrid";
-import Stack from "@/components/About/Stack";
-import Footer from "@/components/Intro/Footer";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import FeaturedWork from "@/components/sections/FeaturedWork";
+import WorkGrid from "@/components/sections/WorkGrid";
+import Stack from "@/components/sections/Stack";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
 
 const Intro = () => {
   return (
@@ -19,6 +20,7 @@ const Intro = () => {
       <div id="stack">
         <Stack />
       </div>
+      <Contact />
       <Footer />
     </div>
   );
