@@ -37,7 +37,7 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-3 text-primary-foreground/60 font-mono text-[10px] tracking-widest uppercase lg:pb-4"
+              className="flex flex-col gap-3 text-primary-foreground/60 font-mono text-[10px] tracking-widest uppercase lg:pb-4 w-full lg:w-auto items-center lg:items-start border-t lg:border-t-0 border-primary-foreground/10 pt-8 lg:pt-0"
             >
               <span className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -70,27 +70,27 @@ const Contact = () => {
             <a 
               href="mailto:santyluna14@gmail.com"
               onClick={handleCopy}
-              className="group relative flex flex-col sm:flex-row items-start sm:items-center justify-between w-full rounded-3xl sm:rounded-full bg-primary-foreground/5 hover:bg-primary-foreground/10 border border-primary-foreground/10 hover:border-accent/40 p-8 sm:p-10 transition-all duration-500 overflow-hidden cursor-pointer"
+              className="group relative flex flex-col sm:flex-row items-center sm:items-center justify-between w-full rounded-3xl sm:rounded-full bg-primary-foreground/5 hover:bg-primary-foreground/10 border border-primary-foreground/10 hover:border-accent/40 p-6 sm:p-10 transition-all duration-500 overflow-hidden cursor-pointer"
             >
               {/* Background fill animation */}
               <div className="absolute inset-0 bg-accent/5 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
               
-              <div className="relative z-10">
-                <span className="text-3xl sm:text-5xl md:text-6xl font-serif italic text-primary-foreground group-hover:text-accent transition-colors duration-500">
+              <div className="relative z-10 w-full sm:w-auto text-center sm:text-left">
+                <span className="text-[clamp(1.25rem,6vw,3.5rem)] sm:text-5xl md:text-6xl font-serif italic text-primary-foreground group-hover:text-accent transition-colors duration-500 block break-all sm:break-normal">
                   santyluna14@gmail.com
                 </span>
               </div>
               
-              <div className="relative z-10 mt-6 sm:mt-0 flex items-center gap-4 text-xs font-mono uppercase tracking-[0.2em]">
+              <div className="relative z-10 mt-8 sm:mt-0 flex items-center gap-4 text-xs font-mono uppercase tracking-[0.2em]">
                 {copied ? (
                   <span className="text-green-400 font-bold transition-all duration-300">Copied!</span>
                 ) : (
-                  <span className="text-primary-foreground/30 group-hover:text-primary-foreground/70 transition-colors duration-300">
+                  <span className="hidden xs:block text-primary-foreground/30 group-hover:text-primary-foreground/70 transition-colors duration-300">
                     Click to copy
                   </span>
                 )}
                 
-                <div className={`flex items-center justify-center w-14 h-14 rounded-full border transition-all duration-500 ${copied ? 'border-green-400 bg-green-400/10' : 'border-primary-foreground/20 group-hover:border-accent group-hover:bg-accent/10'}`}>
+                <div className={`flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full border transition-all duration-500 ${copied ? 'border-green-400 bg-green-400/10' : 'border-primary-foreground/20 group-hover:border-accent group-hover:bg-accent/10'}`}>
                   {copied ? (
                     <CheckCircle2 size={24} className="text-green-400" />
                   ) : (
