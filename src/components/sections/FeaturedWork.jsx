@@ -1,7 +1,7 @@
 import { motion as Motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 // ─── Scenarios ────────────────────────────────────────────────────────────────
 const VLYNK_SCENARIOS = [
@@ -95,7 +95,7 @@ const ProjectConsole = ({ scenarios, title }) => {
     timeouts.current = [];
   };
 
-  const runScenario = (idx) => {
+  const runScenario = useCallback((idx) => {
     clearAll();
     setVisibleLines([]);
     setRunning(true);
@@ -118,18 +118,26 @@ const ProjectConsole = ({ scenarios, title }) => {
       timeouts.current.push(pauseId);
     }, last.t + 1500);
     timeouts.current.push(nextId);
-  };
+  }, [scenarios]);
 
   useEffect(() => {
-    if (isInView) {
-      runScenario(scenarioIdx);
-    } else {
+    let timer;
+    // Wrap entire side effect in a micro-task to avoid React "cascading render" warnings
+    timer = setTimeout(() => {
+      if (isInView) {
+        runScenario(scenarioIdx);
+      } else {
+        clearAll();
+        setVisibleLines([]);
+        setRunning(false);
+      }
+    }, 0);
+    
+    return () => {
       clearAll();
-      setVisibleLines([]);
-      setRunning(false);
-    }
-    return clearAll;
-  }, [isInView, scenarioIdx]);
+      if (timer) clearTimeout(timer);
+    };
+  }, [isInView, scenarioIdx, runScenario]);
 
   const scenario = scenarios[scenarioIdx];
 

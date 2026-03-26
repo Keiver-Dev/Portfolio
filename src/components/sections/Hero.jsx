@@ -19,7 +19,7 @@ const itemVariants = {
 
 const Hero = () => {
   const links = [
-    { label: "Send me an email", href: "mailto:contact@keiverluna.com", icon: <Mail size={18} /> },
+    { label: "Send me an email", href: "mailto:santyluna14@gmail.com", icon: <Mail size={18} /> },
     { label: "Browse my work history", href: "#work", icon: <Briefcase size={18} /> },
     { label: "Explore my Github", href: "https://github.com/Keiver-Dev", icon: <GithubIcon size={18} /> },
     { label: "Connect on LinkedIn", href: "https://www.linkedin.com/in/keiver-luna/", icon: <LinkedInIcon size={18} /> },
