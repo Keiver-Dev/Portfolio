@@ -18,10 +18,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vender-framer": ["framer-motion"],
-          "vender-icons": ["lucide-react"],
-          "vender-router": ["react-router-dom"],
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("framer-motion")) return "vender-framer";
+            if (id.includes("lucide-react")) return "vender-icons";
+            if (id.includes("react-router-dom")) return "vender-router";
+          }
         },
       },
     },
