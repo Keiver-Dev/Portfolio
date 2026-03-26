@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import Intro from "@/pages/Intro";
-import CaseStudy from "@/pages/CaseStudy";
-import About from "@/pages/About";
-import Works from "@/pages/Works";
+import { lazy, Suspense, useEffect } from "react";
+const Intro = lazy(() => import("@/pages/Intro"));
+const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
+const About = lazy(() => import("@/pages/About"));
+const Works = lazy(() => import("@/pages/Works"));
 import CustomCursor from "@/components/ui/CustomCursor";
 
 // Scroll to top on route change
@@ -33,14 +33,16 @@ const App = () => {
       <ScrollToTop />
       <CustomCursor />
       <div className="flex flex-col min-h-screen bg-background text-text-primary selection:bg-accent/30 selection:text-primary">
-        <Routes>
-          <Route path="/" element={<Intro />} />
-          <Route path="/works" element={<Works />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/case/:id" element={<CaseStudy />} />
-          {/* Fallback to Home */}
-          <Route path="*" element={<Intro />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Intro />} />
+            <Route path="/works" element={<Works />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/case/:id" element={<CaseStudy />} />
+            {/* Fallback to Home */}
+            <Route path="*" element={<Intro />} />
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );

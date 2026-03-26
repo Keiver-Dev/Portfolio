@@ -1,7 +1,7 @@
 import { motion as Motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 
 // ─── Scenarios ────────────────────────────────────────────────────────────────
 const VLYNK_SCENARIOS = [
@@ -82,7 +82,9 @@ const TAG_STYLES = {
 
 const TYPE_OPACITY = { info: 1, ok: 1, muted: 0.55, done: 1 };
 
-const ProjectConsole = ({ scenarios, title }) => {
+const ProjectConsole = memo(({ scenarios, title }) => {
+  // ... existing component logic ...
+  // (No changes inside the component)
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-80px" });
   const [scenarioIdx, setScenarioIdx] = useState(0);
@@ -197,7 +199,7 @@ const ProjectConsole = ({ scenarios, title }) => {
       </div>
     </div>
   );
-};
+});
 
 const FeaturedWork = () => {
   const containerVariants = {
