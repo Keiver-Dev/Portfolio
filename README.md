@@ -1,17 +1,58 @@
-# React + Vite
+# keiver.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio — https://keiverluna.com
 
-Currently, two official plugins are available:
+Built with React 19, Vite, Tailwind CSS v4, and Framer Motion. Editorial aesthetic, dark/light theme, custom cursor, and case studies for each project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework** — React 19 + Vite 8
+- **Styling** — Tailwind CSS v4
+- **Animation** — Framer Motion 12
+- **Routing** — React Router v7
+- **Icons** — Lucide React
+- **Deploy** — Vercel
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Portfolio
+```
+src/
+├── components/
+│   ├── layout/       # Header, Footer
+│   ├── sections/     # Hero, Stack, FeaturedWork, Contact, etc.
+│   └── ui/           # CustomCursor, ThemeToggle, ProjectCard, Icons
+├── data/
+│   └── projects.js   # All project data (real + concepts)
+└── pages/
+    ├── Intro.jsx
+    ├── About.jsx
+    ├── Works.jsx
+    └── CaseStudy.jsx
+```
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Deploy
+
+Deployed on Vercel. The `vercel.json` at the root handles client-side routing:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
+
+Every push to `main` deploys automatically.
+
+---
+
+[github.com/Keiver-Dev](https://github.com/Keiver-Dev) · [linkedin.com/in/keiver-luna](https://www.linkedin.com/in/keiver-luna/)
