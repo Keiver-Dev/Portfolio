@@ -1,5 +1,41 @@
 export const projects = [
   {
+    id: "runway",
+    type: "real",
+    title: "Runway",
+    subtitle: "Transactional SQL Migration CLI",
+    description: "A lightweight, reliable, and transactional SQL migration CLI for Node.js. It ensures database schema evolution is safe, consistent, and fully reversible.",
+    overview: "I built Runway because existing migration tools often lack the safety nets needed for production — like SHA-256 integrity checks and multi-step rollbacks. It's built for developers who need a minimal, reliable, and transactional tool that just works without overhead or complex configurations.",
+    challenge: "Ensuring absolute integrity in a cross-platform environment was the main hurdle. I had to implement line ending normalization (CRLF/LF) before hashing to prevent checksum mismatches between Mac and Windows developers. Implementing a multi-step rollback system also required careful state management and history tracking in the database.",
+    solution: "Runway uses a dedicated state-tracking table in PostgreSQL to manage history, checksums, and execution order. It supports transactional SQL execution, meaning if a migration fails, the entire transaction rolls back. I also built a dry-run mode and a baseline command to help onboard existing databases without re-running old scripts.",
+    technologies: ["Node.js", "PostgreSQL", "SQL", "Commander", "Dotenv", "SHA-256"],
+    stats: [
+      { label: "Version", value: "v0.2.0" },
+      { label: "License", value: "MIT" },
+      { label: "Dependencies", value: "3" }
+    ],
+    architecture: {
+      type: "CLI + Transactional Engine",
+      description: "A Node.js CLI that orchestrates SQL scripts via the `pg` driver. It uses a state-tracking table in the target database to manage migration history and ensures absolute integrity through SHA-256 checksums."
+    },
+    process: [
+      { phase: "Infrastructure", description: "Defined the migration file naming convention (NNN_description.sql) and the state-tracking table schema." },
+      { phase: "Engine", description: "Built the core migration engine with support for atomic transactions and dry-run mode." },
+      { phase: "Integrity", description: "Implemented SHA-256 checksum validation to prevent 'silent' changes to applied migration files." },
+      { phase: "Rollback", description: "Developed a multi-step rollback system that handles history tracking via `rolled_back_at` timestamps." }
+    ],
+    learnings: [
+      "Transactional migrations are a must-have — any tool that doesn't wrap migrations in transactions is a risk to production data.",
+      "Line ending normalization is a hidden nightmare for checksums in cross-platform teams; I had to normalize content before hashing to keep it consistent.",
+      "CLI tools require high attention to detail in status messaging; clear ASCII indicators improve the developer experience significantly."
+    ],
+    links: {
+      github: "https://github.com/Vlynk-Studios/runway",
+      live: "npm Package"
+    }
+  },
+
+  {
     id: "vlynk",
     type: "real",
     title: "Vlynk App",
@@ -72,37 +108,37 @@ export const projects = [
   },
 
   {
-    id: "kairo-email",
+    id: "letterbox-email",
     type: "real",
-    title: "Kairo Email Service",
+    title: "Letterbox Email Service",
     subtitle: "Email Delivery Microservice",
-    description: "A Node.js microservice that handles transactional emails — verification codes, password recovery, workspace invitations, task assignments, and more. Built to be dropped into any project via API.",
-    overview: "I built Kairo because I kept copying and pasting email logic between projects. I wanted one service I could call from anywhere with an API key and get reliable email delivery. It handles SMTP configuration, HTML templates, audit logging to PostgreSQL, and health checks — all the boring infrastructure so the main app doesn't have to.",
-    challenge: "Making it actually reusable across different projects meant thinking carefully about the API design, authentication, and how to handle errors gracefully without crashing the calling service. Supporting multiple SMTP providers without rewriting the core logic was also tricky.",
-    solution: "I used Nodemailer with a swappable config so you can point it at Gmail, SendGrid, or any SMTP provider. API key auth guards every endpoint. PostgreSQL logs every sent email for auditing. There's a test mode using Ethereal so you can develop without a real email account.",
+    description: "A Node.js microservice that handles transactional emails — verification codes, password recovery, workspace invitations, and task assignments. Built to be dropped into any project via API.",
+    overview: "I built Letterbox because I kept copying and pasting email logic between projects. I wanted one service I could call from anywhere with an API key and get reliable email delivery. It handles SMTP configuration, HTML templates, audit logging to PostgreSQL, and health checks — all the boring infrastructure so the main app doesn't have to.",
+    challenge: "Transforming it from a project-specific script into a robust microservice meant thinking about scalability and reliability. Supporting multiple SMTP providers, implementing endpoint-specific rate limiting, and ensuring 100% test coverage for 23 different email templates were the biggest technical hurdles.",
+    solution: "The service is built on Nodemailer and Express, secured with API key auth. It features 23 built-in HTML templates, PostgreSQL audit logging, and a dedicated test mode using Ethereal. Each endpoint is rate-limited to prevent abuse, and automated integration tests ensure every template renders correctly before delivery.",
     technologies: ["Node.js", "Express", "Nodemailer", "PostgreSQL", "Jest", "Supertest", "Docker"],
     stats: [
-      { label: "Templates", value: "7 built-in" },
+      { label: "Templates", value: "23 built-in" },
       { label: "License", value: "MIT" },
-      { label: "Status", value: "Beta" }
+      { label: "Status", value: "v0.5.0" }
     ],
     architecture: {
       type: "REST Microservice",
-      description: "An Express API secured with API key auth. Each endpoint accepts a payload, renders an HTML template, sends via Nodemailer, and logs the result to PostgreSQL. Health check endpoint exposes DB and SMTP status."
+      description: "An Express API secured with API key auth. Each endpoint accepts a payload, renders an HTML template, sends via Nodemailer, and logs the result to PostgreSQL. Includes rate limiting and health check endpoints."
     },
     process: [
-      { phase: "Problem", description: "Identified repetitive email setup across projects and decided to extract it into a standalone service with a clean API." },
-      { phase: "Design", description: "Defined the endpoint structure, template system, and auth model before writing any code. Kept the API intentionally simple." },
-      { phase: "Build", description: "Built the Express server, Nodemailer integration, 7 HTML templates, PostgreSQL audit logging, and a full integration test suite with Jest and Supertest." },
-      { phase: "Package", description: "Added Docker support and a test mode with Ethereal so the service is easy to run locally without any real credentials." }
+      { phase: "Extraction", description: "Isolated shared email logic from internal tools into a standalone service with a clean, extensible API." },
+      { phase: "Templates", description: "Designed and implemented 23 responsive HTML email templates for all common transactional use cases." },
+      { phase: "Resiliency", description: "Added PostgreSQL audit logging, SMTP health checks, and rate-limiting to ensure production-grade reliability." },
+      { phase: "Testing", description: "Achieved 100% test coverage for all email templates and core delivery logic using Jest and Supertest." }
     ],
     learnings: [
-      "Extracting shared logic into a microservice is only worth it if the API is clean enough to not become a maintenance burden itself.",
-      "A test mode with Ethereal was essential — being able to develop email flows without a real SMTP account saved a lot of friction.",
-      "Health check endpoints are small to build but incredibly useful when debugging why something isn't working in a composed system."
+      "Microservices are only as good as their reliability; adding health checks and detailed logging saved hours of debugging in multi-service environments.",
+      "Automating the setup with Makefiles and Docker reduced onboarding time to zero for other developers in the team.",
+      "Separating templates from code makes the system much more maintainable and allows for easier iterations on the email design."
     ],
     links: {
-      github: "https://github.com/Keiver-Dev/kairo-mail-service",
+      github: "https://github.com/Keiver-Dev/Letterbox",
       live: "Backend API"
     }
   },
