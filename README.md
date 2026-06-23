@@ -2,7 +2,7 @@
 
 Personal portfolio — https://keiverluna.com
 
-Built with React 19, Vite, Tailwind CSS v4, and Framer Motion. Editorial aesthetic, dark/light theme, custom cursor, and case studies for each project.
+Backend Systems Engineer specializing in Node.js, PostgreSQL, and distributed systems. This portfolio is built with React 19, Vite, Tailwind CSS v4, and Framer Motion — showcasing backend architecture with full stack capabilities.
 
 ---
 
