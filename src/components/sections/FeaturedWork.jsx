@@ -63,6 +63,31 @@ const FORGE_SCENARIOS = [
   }
 ];
 
+const KERITH_SCENARIOS = [
+  {
+    id: "nits-tracking",
+    header: "engine · nits.tracker",
+    lines: [
+      { t: 0, text: "scanning src/modules/*", tag: "system", type: "info" },
+      { t: 600, text: "registry match: user-auth (v1.8.2)", tag: "nits", type: "ok" },
+      { t: 1100, text: "path changed: auth -> modules/auth", tag: "tracker", type: "muted" },
+      { t: 1500, text: "updating reference map", tag: "nits", type: "ok" },
+      { t: 2000, text: "integrity check passed", tag: "system", type: "done" },
+    ],
+  },
+  {
+    id: "route-discovery",
+    header: "discovery · app.mount",
+    lines: [
+      { t: 0, text: "mount initiated on /api", tag: "discovery", type: "info" },
+      { t: 500, text: "found router: auth-v1 (esm)", tag: "discovery", type: "ok" },
+      { t: 900, text: "found router: billing (esm)", tag: "discovery", type: "ok" },
+      { t: 1300, text: "registering @modules/contracts", tag: "alias", type: "muted" },
+      { t: 1700, text: "server ready · 12 routes mounted", tag: "system", type: "done" },
+    ],
+  }
+];
+
 const TAG_STYLES = {
   github: { color: "var(--accent, #facc15)", bg: "rgba(250,204,21,0.08)" },
   scanner: { color: "#f87171", bg: "rgba(248,113,113,0.08)" },
@@ -77,6 +102,10 @@ const TAG_STYLES = {
   notify: { color: "#fb923c", bg: "rgba(251,146,60,0.08)" },
   ws: { color: "#34d399", bg: "rgba(52,211,153,0.08)" },
   system: { color: "#a3a3a3", bg: "rgba(163,163,163,0.06)" },
+  nits: { color: "#34d399", bg: "rgba(52,211,153,0.08)" },
+  tracker: { color: "#60a5fa", bg: "rgba(96,165,250,0.08)" },
+  discovery: { color: "#c084fc", bg: "rgba(192,132,252,0.08)" },
+  alias: { color: "var(--accent, #facc15)", bg: "rgba(250,204,21,0.08)" },
   done: { color: "#accent", bg: "rgba(250,204,21,0.08)" },
 };
 
@@ -224,6 +253,29 @@ const FeaturedWork = () => {
 
   const projects = [
     {
+      title: "Kerith",
+      type: "real",
+      description: "Structural layer for Node.js/TypeScript. Zero lock-in architecture enforcement, persistent identity tracking (NITS), and CI validation without runtime overhead.",
+      caseStudyLink: "/case/kerith",
+      visualContent: (
+        <div className="w-full h-full">
+          <ProjectConsole title="kerith · structural-layer" scenarios={KERITH_SCENARIOS} />
+        </div>
+      ),
+    },
+    {
+      title: "Runway",
+      type: "real",
+      description: "Transactional SQL migration CLI for Node.js. SHA-256 integrity checks, multi-step rollbacks, and atomic transaction support. Production-safe schema evolution.",
+      caseStudyLink: "/case/runway",
+      isReversed: true,
+      visualContent: (
+        <div className="w-full h-full">
+          <ProjectConsole title="runway · migration-engine" scenarios={KERITH_SCENARIOS} />
+        </div>
+      ),
+    },
+    {
       title: "Vlynk App",
       type: "real",
       description: "SaaS 'Active Context Engine' for dev teams. Deterministic context propagation engine, event-driven by GitHub. v0.9.2-beta, 506/506 tests passing.",
@@ -231,18 +283,6 @@ const FeaturedWork = () => {
       visualContent: (
         <div className="w-full h-full">
           <ProjectConsole title="vlynk · context-engine" scenarios={VLYNK_SCENARIOS} />
-        </div>
-      ),
-    },
-    {
-      title: "webhook-forge",
-      type: "real",
-      description: "Open source webhook inspection platform. Includes hookpipe (CLI tunnel). Audited for security (SSRF, WebSocket Auth, SQL Injection).",
-      caseStudyLink: "/case/webhook-forge",
-      isReversed: true,
-      visualContent: (
-        <div className="w-full h-full">
-          <ProjectConsole title="hookpipe · audit-pipeline" scenarios={FORGE_SCENARIOS} />
         </div>
       ),
     }

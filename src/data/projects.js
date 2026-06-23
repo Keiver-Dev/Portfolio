@@ -1,5 +1,41 @@
 export const projects = [
   {
+    id: "kerith",
+    type: "real",
+    title: "Kerith",
+    subtitle: "Living Structure on Real JavaScript",
+    description: "A structural layer for Node.js and TypeScript that converts project architecture into an operative system entity. Zero lock-in — the code belongs to the developer, not the framework.",
+    overview: "In Node.js, project architecture lives in the team's head. Folders are passive, imports are paths, and there's no mechanism to make architecture visible, verifiable, or traceable. Kerith solves this by providing explicit module boundaries, declared dependencies, and persistent identity tracking — all without replacing Express, Fastify, or any existing runtime.",
+    challenge: "The core challenge was building a system that enforces structure without creating framework lock-in. Unlike NestJS or DI containers that take control of the runtime, Kerith had to provide structure during bootstrap and then completely withdraw — leaving the runtime pure. Implementing the NITS (Identity Tracking System) that survives aggressive refactorings was the technical breakthrough.",
+    solution: "Kerith uses the NITS v1.8.2+ system where each module carries a persistent ID in a `.kerith` file that commits to Git. This guarantees 100% certainty that a moved module is the same module. The system provides `kerith check` for CI validation, native alias resolution via tsconfig.json, and zero runtime overhead — the framework doesn't exist in the critical path of any request.",
+    technologies: ["Node.js", "TypeScript", "ESLint Plugin", "Static Analysis", "NITS", "Express", "Fastify"],
+    stats: [
+      { label: "Version", value: "v1.8.2" },
+      { label: "Tests", value: "35+ (≥80% coverage)" },
+      { label: "License", value: "MIT" }
+    ],
+    architecture: {
+      type: "Structural Layer — Zero Lock-In",
+      description: "Kerith lives above Express/Fastify, provides structure during bootstrap, then withdraws. The runtime is pure. If the team stops using it, `kerith disconnect` translates the project to Express without rewriting anything."
+    },
+    process: [
+      { phase: "Problem", description: "Identified that Node.js architecture is informal — folders are passive, imports break on moves, and circular dependencies explode at runtime." },
+      { phase: "NITS", description: "Built the persistent identity tracking system where each module carries a `.kerith` file with a unique ID that survives renames and moves." },
+      { phase: "Zero Lock-In", description: "Designed the system to withdraw after bootstrap — no DI container, no reflection, no runtime overhead. The code remains valid TypeScript without Kerith." },
+      { phase: "Tooling", description: "Implemented `kerith check` for CI validation, ESLint plugin for editor feedback, and scaffolding via `@kerith/create`." }
+    ],
+    learnings: [
+      "The code should belong to the developer, not the framework. Kerith depends on the code to understand it — NestJS makes the code depend on the framework.",
+      "Persistent identity (NITS) eliminates the risk of module relocation — moving a module is now a recorded, traceable, reversible event.",
+      "Zero runtime overhead is achievable if structure is enforced at bootstrap time, not request time. Serverless cold starts remain comparable to Express."
+    ],
+    links: {
+      github: "https://github.com/kerithjs/kerith",
+      live: "kerith.dev"
+    }
+  },
+
+  {
     id: "runway",
     type: "real",
     title: "Runway",
@@ -72,42 +108,6 @@ export const projects = [
   },
 
   {
-    id: "webhook-forge",
-    type: "real",
-    title: "Webhook Forge",
-    subtitle: "Webhook Inspector & Replay Engine",
-    description: "An open-source dev tool for receiving, inspecting, and replaying webhooks locally. Has a real-time dashboard, HMAC validation for major providers, and a CLI called `wf` to manage everything from the terminal.",
-    overview: "I built Webhook Forge because testing webhooks in local development is painful — you need a public URL, you lose events if the server is down, and debugging payload issues is slow. I wanted a self-hosted tool that captures everything, shows it clearly, and lets you replay any event without triggering it again from the provider.",
-    challenge: "The hardest part was coordinating three separate packages — the server, the React dashboard, and the CLI — so they work together seamlessly. The server needs to receive webhooks, validate HMAC signatures, forward to the local app, and broadcast to the dashboard in real time, all at once.",
-    solution: "I structured it as a monorepo with three packages: the ingestion server (Express + WebSockets), a brutalist React dashboard for real-time inspection, and a `wf` CLI to control everything from the terminal. PostgreSQL handles persistence with automatic cleanup. Signature validation is built in for GitHub, Stripe, Shopify, and Vercel.",
-    technologies: ["Node.js", "Express", "React 19", "PostgreSQL", "WebSocket", "Tailwind v4", "Zustand", "TanStack Query"],
-    stats: [
-      { label: "Version", value: "0.1.0-beta.1" },
-      { label: "License", value: "MIT" },
-      { label: "Providers", value: "GitHub, Stripe, Shopify, Vercel" }
-    ],
-    architecture: {
-      type: "Monorepo — Server / Dashboard / CLI",
-      description: "The Express server receives webhooks, validates HMAC signatures, forwards to the local app, and pushes events to the React dashboard via WebSocket. The `wf` CLI controls and queries the server from the terminal."
-    },
-    process: [
-      { phase: "Problem", description: "Identified the core pain: webhooks are hard to test locally — events get lost, payloads are opaque, and you always need a tunnel you don't control." },
-      { phase: "Design", description: "Split the tool into three packages (server, client, CLI) and defined how they communicate before writing any feature code." },
-      { phase: "Build", description: "Built the ingestion server first, then the dashboard with real-time WebSocket updates, then the CLI to wire everything together. Added HMAC validation for four major providers." },
-      { phase: "Release", description: "Published as open source at v0.1.0-beta.1 with a full README, CLI reference, and provider security docs." }
-    ],
-    learnings: [
-      "Monorepos are worth the initial setup cost — having the server, dashboard, and CLI in one repo made it much easier to iterate across all three at once.",
-      "HMAC signature validation isn't hard, but it needs to be correct. Each provider formats their signature slightly differently and those details matter.",
-      "Building a CLI tool changed how I think about UX — the terminal has no room for ambiguity, so every command and its output needs to be explicit."
-    ],
-    links: {
-      github: "https://github.com/Vlynk-Studios/webhook-forge",
-      live: "CLI Tool"
-    }
-  },
-
-  {
     id: "letterbox-email",
     type: "real",
     title: "Letterbox Email Service",
@@ -140,6 +140,42 @@ export const projects = [
     links: {
       github: "https://github.com/Keiver-Dev/Letterbox",
       live: "Backend API"
+    }
+  },
+
+  {
+    id: "webhook-forge",
+    type: "real",
+    title: "Webhook Forge",
+    subtitle: "Webhook Inspector & Replay Engine",
+    description: "An open-source dev tool for receiving, inspecting, and replaying webhooks locally. Has a real-time dashboard, HMAC validation for major providers, and a CLI called `wf` to manage everything from the terminal.",
+    overview: "I built Webhook Forge because testing webhooks in local development is painful — you need a public URL, you lose events if the server is down, and debugging payload issues is slow. I wanted a self-hosted tool that captures everything, shows it clearly, and lets you replay any event without triggering it again from the provider.",
+    challenge: "The hardest part was coordinating three separate packages — the server, the React dashboard, and the CLI — so they work together seamlessly. The server needs to receive webhooks, validate HMAC signatures, forward to the local app, and broadcast to the dashboard in real time, all at once.",
+    solution: "I structured it as a monorepo with three packages: the ingestion server (Express + WebSockets), a brutalist React dashboard for real-time inspection, and a `wf` CLI to control everything from the terminal. PostgreSQL handles persistence with automatic cleanup. Signature validation is built in for GitHub, Stripe, Shopify, and Vercel.",
+    technologies: ["Node.js", "Express", "React 19", "PostgreSQL", "WebSocket", "Tailwind v4", "Zustand", "TanStack Query"],
+    stats: [
+      { label: "Version", value: "0.1.0-beta.1" },
+      { label: "License", value: "MIT" },
+      { label: "Providers", value: "GitHub, Stripe, Shopify, Vercel" }
+    ],
+    architecture: {
+      type: "Monorepo — Server / Dashboard / CLI",
+      description: "The Express server receives webhooks, validates HMAC signatures, forwards to the local app, and pushes events to the React dashboard via WebSocket. The `wf` CLI controls and queries the server from the terminal."
+    },
+    process: [
+      { phase: "Problem", description: "Identified the core pain: webhooks are hard to test locally — events get lost, payloads are opaque, and you always need a tunnel you don't control." },
+      { phase: "Design", description: "Split the tool into three packages (server, client, CLI) and defined how they communicate before writing any feature code." },
+      { phase: "Build", description: "Built the ingestion server first, then the dashboard with real-time WebSocket updates, then the CLI to wire everything together. Added HMAC validation for four major providers." },
+      { phase: "Release", description: "Published as open source at v0.1.0-beta.1 with a full README, CLI reference, and provider security docs." }
+    ],
+    learnings: [
+      "Monorepos are worth the initial setup cost — having the server, dashboard, and CLI in one repo made it much easier to iterate across all three at once.",
+      "HMAC signature validation isn't hard, but it needs to be correct. Each provider formats their signature slightly differently and those details matter.",
+      "Building a CLI tool changed how I think about UX — the terminal has no room for ambiguity, so every command and its output needs to be explicit."
+    ],
+    links: {
+      github: "https://github.com/Vlynk-Studios/webhook-forge",
+      live: "CLI Tool"
     }
   },
 
@@ -253,6 +289,5 @@ export const projects = [
       live: "Unbuilt"
     }
   },
-
 ];
 

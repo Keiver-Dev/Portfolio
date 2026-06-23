@@ -26,8 +26,8 @@ const About = () => {
               <div className="h-px w-20 bg-border" />
             </div>
             <h1 className="text-7xl md:text-[10rem] font-serif tracking-tighter text-text-primary leading-[0.9]">
-              Backend-Driven <br />
-              <em className="italic text-accent">Full Stack Developer.</em>
+              Backend <br />
+              <em className="italic text-accent">Systems Engineer.</em>
             </h1>
             <p className="text-2xl md:text-3xl font-serif italic text-text-secondary max-w-3xl leading-snug">
               "I design interfaces. I engineer systems."
@@ -58,7 +58,7 @@ const About = () => {
                   Then I moved deeper. My foundation was built through hands-on residencies at El Dorado and Trade Squad. Working alongside real product teams taught me what it means to ship under pressure.
                 </p>
                 <p>
-                  <strong className="text-text-primary font-medium">Backend, APIs, real-time systems.</strong> Today I work across the full stack with a clear bias toward the architecture that keeps products running when things get complicated. I build from Porto Alegre, fully remote.
+                  <strong className="text-text-primary font-medium">Backend, APIs, real-time systems.</strong> Today I specialize in backend architecture with full stack capabilities — I build the systems that keep products running when things get complicated, and I can handle the frontend when needed. I build from Porto Alegre, fully remote.
                 </p>
               </div>
 
@@ -73,7 +73,7 @@ const About = () => {
                   <span className="text-xs font-bold tracking-widest text-primary uppercase">
                     Role
                   </span>
-                  <span className="text-xl font-serif italic">Full Stack Developer</span>
+                  <span className="text-xl font-serif italic">Backend Systems Engineer</span>
                 </div>
                 <div className="flex flex-col gap-4">
                   <span className="text-xs font-bold tracking-widest text-primary uppercase">
